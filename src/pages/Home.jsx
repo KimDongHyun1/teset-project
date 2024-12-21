@@ -42,7 +42,7 @@ const Home = () => {
             <MainCard title="To Do" onClick={() => handleCardClick('/todo')} />
           </Col>
           <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
-            <MainCard title="Expense Details" onClick={() => handleCardClick('/expense')} />
+            <MainCard title="Expense" onClick={() => handleCardClick('/expense')} />
           </Col>
           <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
             <MainCard title="Stock" onClick={() => handleCardClick('/stock')} />

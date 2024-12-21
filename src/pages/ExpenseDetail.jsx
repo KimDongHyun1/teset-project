@@ -8,8 +8,14 @@ const ExpenseDetail = () => {
   const navigate = useNavigate();
 
   const [incomes, setIncomes] = useState([
-    { id: 1, source: '부업', amount: 1000000 },
-    { id: 2, source: '월급', amount: 4000000 },
+    { id: 1, source: 'ㄷㅇ', amount: 100000 },
+    { id: 2, source: 'ㅌㅎ', amount: 300000 },
+    { id: 3, source: 'ㅈㅎ', amount: 400000 },
+    { id: 4, source: 'ㅅㅎ', amount: 400000 },
+    { id: 5, source: 'ㅍㅅ', amount: 500000 },
+    { id: 6, source: 'ㅈㅇ', amount: 160000 },
+    { id: 7, source: 'ㅊㅇ', amount: 240000 },
+    { id: 8, source: 'ㅁㅈ', amount: 200000 },
   ]);
 
   const [newSource, setNewSource] = useState('');
@@ -45,25 +51,28 @@ const ExpenseDetail = () => {
         <h1 className="text-2xl font-bold text-center">{month}</h1>
       </div>
 
-      {/* 입력 폼 */}
       <div className="flex gap-2 mb-4">
         <input
           type="text"
           placeholder="수입 출처"
           value={newSource}
           onChange={(e) => setNewSource(e.target.value)}
-          className="w-1/2 p-2 border rounded-md"
+          className="w-1/3 p-2 border rounded-md"
         />
         <input
           type="number"
           placeholder="금액"
           value={newAmount}
           onChange={(e) => setNewAmount(e.target.value)}
-          className="w-1/2 p-2 border rounded-md"
+          className="w-1/3 p-2 border rounded-md"
         />
         <button 
           onClick={addIncome}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-md"
+          className="bg-navy text-white px-4 py-2 rounded-md shadow-md w-1/3"
+          style={{
+            background: '#003366', // 남색 배경색
+            borderColor: 'transparent',
+          }}
         >
           추가
         </button>

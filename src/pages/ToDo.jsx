@@ -15,11 +15,10 @@ const ToDo = () => {
   // 초기화
   useEffect(() => {
     const defaultTasks = [
-      { id: '1', text: '내 블로그 만들기' },
-      { id: '2', text: 'AWS 자격증 취득' },
-      { id: '3', text: '68KG 만들기' },
-      { id: '4', text: '슬램덩크 보기' },
-      { id: '5', text: '템플스테이 체험' }
+      { id: '1', text: '운동' },
+      { id: '2', text: 'AWS 자격증 공부 1시간' },
+      { id: '3', text: '바람의나라' },
+      { id: '4', text: '피부과 알아보기' },
     ];
     setTasks(defaultTasks);    
   }, []);
