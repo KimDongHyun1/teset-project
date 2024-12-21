@@ -5,6 +5,8 @@ import UserInfo from './pages/UserInfo';
 import PartnerInfo from './pages/PartnerInfo';
 import Chat from './pages/Chat';
 import { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ToDo from './pages/ToDo';
 
 function App() {
   // logic
@@ -27,6 +29,9 @@ function App() {
         <Route path="/user-info" element={<UserInfo handleUserInfo={handleUserInfo} />} />
         <Route path="/partner-info" element={<PartnerInfo handlePartnerInfo={handlePartnerInfo}/>} />
         <Route path="/chat" element={<Chat userInfo={userInfo} partnerInfo={partnerInfo} />} />
+
+        <Route path="/todo" element={<ToDo />} />
+        
       </Routes>
     </div>
   )

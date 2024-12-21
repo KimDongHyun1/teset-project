@@ -2,15 +2,16 @@ import React from 'react';
 import Title from '../components/Title';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
+import MainCard from '../components/MainCard';
 
 const Home = () => {
 
   const history = useNavigate();
 
-  // logic
-  const handleClick = () => {
-    history("/user-info")
-  }
+  // 카드 클릭 이벤트 핸들러
+  const handleCardClick = (url) => {
+    history(url);
+  };
 
 
   // view
@@ -18,12 +19,25 @@ const Home = () => {
     <div className="w-full h-full px-6 pt-10 break-keep overflow-auto">
       <i className="w-168 h-168 rounded-full bg-date-pink-500 fixed -z-10 -left-60 -top-56"></i>
       <div className="fixed left-0 top-1/2 transform -translate-y-1/2 -z-10">
-        <img src="./images/hero.png" alt="hero" />
+        <img src="./images/black-background.jpg" alt="" />
       </div>
       <div className="h-full flex flex-col">
-        <Title mainTitle={'소개팅 1초전'} subTitle={'소개팅 전, 어떤 얘기를 해야되나 고민되시나요? 미리 연습하고 가보세요!'}/>
-
-        <Button text={'get start'} onClick={handleClick} />
+        <Title mainTitle={'동현 App'} />
+        <br />
+        
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          rowGap: '2rem', 
+          columnGap: '1rem', 
+          justifyItems: 'center',
+          alignItems: 'center'
+        }}>
+          <MainCard title={'To Do'} onClick={() => handleCardClick('/todo')} />
+          <MainCard title={'Expense Details'} />
+          <MainCard title={'Stock'} />
+        </div>
+        
       </div>
     </div>
   );
