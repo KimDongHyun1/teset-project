@@ -15,7 +15,6 @@ const StockPage = () => {
     navigate('/');
   };
 
-
   const [stocks, setStocks] = useState([
     { id: 1, name: '테슬라', currentPrice: 400000, myStock: 500000 },
     { id: 2, name: '애플', currentPrice: 300000, myStock: 200000 },
@@ -53,7 +52,6 @@ const StockPage = () => {
         </Card.Body>
       </Card>
 
-
       {/* 주식 테이블 */}
       <Table striped bordered hover>
         <thead>
@@ -81,9 +79,11 @@ const StockPage = () => {
       </div>
 
       {/* 주식 비중 차트 */}
-      <div className="mt-4">
+      <div className="mt-4" style={{ height: '300px' }}>
         <h3 className="text-center">주식 비중</h3>
-        <Pie data={data} />
+        <div style={{ width: '100%', height: '100%' }}>
+          <Pie data={data} options={{ responsive: true }} />
+        </div>
       </div>
     </div>
   );
