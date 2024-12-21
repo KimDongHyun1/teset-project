@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaCalendarAlt, FaTrashAlt } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Card, Button, ListGroup } from 'react-bootstrap';
+import { Button, ListGroup } from 'react-bootstrap';
 
 const ExpenseDetail = () => {
   const { month } = useParams(); // URL 파라미터 가져오기
@@ -51,27 +51,46 @@ const ExpenseDetail = () => {
         <h1 className="text-2xl font-bold text-center">{month}</h1>
       </div>
 
-      <div className="flex gap-2 mb-4">
+      {/* 입력 폼 */}
+      <div className="mb-4" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 100px', gap: '10px' }}>
+        {/* 수입 출처 */}
         <input
           type="text"
           placeholder="수입 출처"
           value={newSource}
           onChange={(e) => setNewSource(e.target.value)}
-          className="w-1/3 p-2 border rounded-md"
+          style={{
+            padding: '8px',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            width: '100%',  // 꽉 찬 너비
+          }}
         />
+        {/* 금액 */}
         <input
           type="number"
           placeholder="금액"
           value={newAmount}
           onChange={(e) => setNewAmount(e.target.value)}
-          className="w-1/3 p-2 border rounded-md"
+          style={{
+            padding: '8px',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            width: '100%',
+            textAlign: 'right',  // 우측 정렬
+          }}
         />
+        {/* 추가 버튼 */}
         <button 
           onClick={addIncome}
-          className="bg-navy text-white px-4 py-2 rounded-md shadow-md w-1/3"
           style={{
-            background: '#003366', // 남색 배경색
+            backgroundColor: '#003366', // 남색 배경색
             borderColor: 'transparent',
+            color: 'white',
+            padding: '10px 15px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            width: '100%',  // 꽉 찬 너비
           }}
         >
           추가
@@ -87,28 +106,21 @@ const ExpenseDetail = () => {
               className="d-flex justify-content-between align-items-center py-3"
               style={{ backgroundColor: '#f9f9f9', borderBottom: '1px solid #ddd' }}
             >
-              <div className="d-flex align-items-center" style={{ width: '180px', flex: '0 0 auto' }}>
-                <span>{income.source}</span>
-              </div>
-              
-              <div className="d-flex justify-content-end align-items-center" style={{ width: '120px', flex: '0 0 auto' }}>
-                <span>{income.amount.toLocaleString()}</span>
-                <span className="ms-1">원</span>
-                <Button 
-                  variant="danger" 
-                  size="sm" 
-                  onClick={() => deleteIncome(income.id)} 
-                  className="shadow-sm ms-2"
-                  style={{
-                    borderRadius: '50%',
-                    backgroundColor: '#003366',
-                    borderColor: 'transparent',
-                    flex: '0 0 auto', // 버튼 고정
-                  }}
-                >
-                  <FaTrashAlt style={{ color: 'white' }} />
-                </Button>
-              </div>
+              <div>{income.source}</div>
+              <div className="text-right">{income.amount.toLocaleString()} 원</div>
+              <Button 
+                variant="danger" 
+                size="sm" 
+                onClick={() => deleteIncome(income.id)} 
+                className="shadow-sm"
+                style={{
+                  borderRadius: '50%',
+                  backgroundColor: '#003366',
+                  borderColor: 'transparent'
+                }}
+              >
+                <FaTrashAlt style={{ color: 'white' }} />
+              </Button>
             </ListGroup.Item>
           ))}
         </ListGroup>
