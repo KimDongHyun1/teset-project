@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaHome, FaTrashAlt } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Table, Button } from 'react-bootstrap';
+import { Card, Button, ListGroup } from 'react-bootstrap';
 
 const ExpenseDetail = () => {
   const { month } = useParams(); // URL 파라미터 가져오기
@@ -29,21 +29,24 @@ const ExpenseDetail = () => {
 
   const totalAmount = incomes.reduce((sum, income) => sum + income.amount, 0);
 
+  const goHome = () => {
+    navigate('/'); // 홈으로 이동
+  };
+
   return (
-    <div className="p-4 bg-white shadow-md rounded-md" style={{ paddingBottom: '100px' }}>
+    <div className="p-4 bg-white shadow-md rounded-md" style={{ paddingBottom: '80px' }}>
       {/* 상단 섹션 */}
       <div className="relative border-b pb-2 mb-4">
-        <FaHome
-          onClick={() => navigate('/')}
+        <FaHome 
+          onClick={goHome} 
           className="absolute left-0 text-blue-500 cursor-pointer"
           style={{ fontSize: '1.8rem', top: '50%', transform: 'translateY(-50%)' }}
         />
-        <h1 className="text-2xl font-bold text-center">Expense Detail</h1>
-        <p className="text-center text-gray-600">선택된 월: {month}</p>
+        <h1 className="text-2xl font-bold text-center">{month}</h1>
       </div>
 
       {/* 입력 폼 */}
-      <div className="mb-4 flex gap-2">
+      <div className="flex gap-2 mb-4">
         <input
           type="text"
           placeholder="수입 출처"
@@ -58,45 +61,49 @@ const ExpenseDetail = () => {
           onChange={(e) => setNewAmount(e.target.value)}
           className="w-1/2 p-2 border rounded-md"
         />
-        <Button onClick={addIncome} variant="primary" className="w-1/4">
+        <button 
+          onClick={addIncome}
+          className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-md"
+        >
           추가
-        </Button>
+        </button>
       </div>
 
-      {/* 수입 목록 테이블 */}
-      <div className="overflow-x-auto mb-4" style={{ maxHeight: 'calc(100vh - 200px)', overflowY: 'auto' }}>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>수입 출처</th>
-              <th className="text-right">금액</th>
-              <th className="text-center">삭제</th>
-            </tr>
-          </thead>
-          <tbody>
-            {incomes.map((income) => (
-              <tr key={income.id}>
-                <td>{income.source}</td>
-                <td className="text-right">{income.amount.toLocaleString()} 원</td>
-                <td className="text-center">
-                  <FaTrashAlt
-                    onClick={() => deleteIncome(income.id)}
-                    className="text-red-500 cursor-pointer"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+      {/* 수입 목록 */}
+      <div className="income-list" style={{ maxHeight: 'calc(100vh - 200px)', overflowY: 'auto', marginBottom: '50px' }}>
+        <ListGroup>
+          {incomes.map((income) => (
+            <ListGroup.Item 
+              key={income.id}
+              className="d-flex justify-content-between align-items-center py-3"
+              style={{ backgroundColor: '#f9f9f9', borderBottom: '1px solid #ddd' }}
+            >
+              <div>{income.source}</div>
+              <div className="text-right">{income.amount.toLocaleString()} 원</div>
+              <Button 
+                variant="danger" 
+                size="sm" 
+                onClick={() => deleteIncome(income.id)} 
+                className="shadow-sm"
+                style={{
+                  borderRadius: '50%',
+                  backgroundColor: '#003366',
+                  borderColor: 'transparent'
+                }}
+              >
+                <FaTrashAlt style={{ color: 'white' }} />
+              </Button>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
       </div>
 
-      {/* 합계 고정 (sticky 사용) */}
-      <div
-        className="sticky bottom-0 left-0 right-0 bg-white border-t shadow-md d-flex justify-content-between align-items-center p-3"
-        style={{ zIndex: 1000 }}
-      >
-        <div className="font-bold text-lg">합계:</div>
-        <div className="font-bold text-xl">{totalAmount.toLocaleString()} 원</div>
+      {/* 합계 고정 */}
+      <div className="bg-white p-4" style={{ position: 'fixed', bottom: '0', left: '0', right: '0', boxShadow: '0 -2px 10px rgba(0,0,0,0.1)', zIndex: '9999' }}>
+        <div className="d-flex justify-content-between align-items-center">
+          <span className="font-bold text-lg">합계:</span>
+          <span className="font-bold text-lg">{totalAmount.toLocaleString()} 원</span>
+        </div>
       </div>
     </div>
   );
