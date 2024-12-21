@@ -79,7 +79,10 @@ const ExpenseDetail = () => {
               style={{ backgroundColor: '#f9f9f9', borderBottom: '1px solid #ddd' }}
             >
               <div>{income.source}</div>
-              <div className="text-right">{income.amount.toLocaleString()} 원</div>
+              <div className="d-flex justify-content-end align-items-center" style={{ width: '120px' }}>
+                <span>{income.amount.toLocaleString()}</span>
+                <span className="ms-1">원</span>
+              </div>
               <Button 
                 variant="danger" 
                 size="sm" 
