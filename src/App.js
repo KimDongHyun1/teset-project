@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ToDo from './pages/ToDo';
 import Expense from './pages/Expense';
 import ExpenseDetail from './pages/ExpenseDetail';
+import StockPage from './pages/StockPage';
 
 function App() {
   // logic
@@ -35,6 +36,7 @@ function App() {
         <Route path="/todo" element={<ToDo />} />
         <Route path="/expense" element={<Expense />} />
         <Route path="/expense/:month" element={<ExpenseDetail />} />
+        <Route path="/stockPage" element={<StockPage />} />
 
         
       </Routes>
