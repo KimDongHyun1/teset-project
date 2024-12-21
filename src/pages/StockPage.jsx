@@ -79,10 +79,10 @@ const StockPage = () => {
       </div>
 
       {/* 주식 비중 차트 */}
-      <div className="mt-4" style={{ height: '300px' }}>
-        <h3 className="text-center">주식 비중</h3>
-        <div style={{ width: '100%', height: '100%' }}>
-          <Pie data={data} options={{ responsive: true }} />
+      <div className="mt-4" style={{ textAlign: 'center' }}>
+        <h3>주식 비중</h3>
+        <div style={{ maxWidth: '500px', margin: '0 auto', height: '300px' }}>
+          <Pie data={data} options={{ responsive: true, maintainAspectRatio: false }} />
         </div>
       </div>
     </div>
