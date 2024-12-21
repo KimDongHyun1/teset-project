@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  /* 스크롤바 스타일 */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #4B5563 #1F2937; /* 스크롤바 색상 */
+  }
+
+  .scrollbar-thumb-rounded {
+    border-radius: 9999px; /* 둥근 스크롤바 thumb */
+  }
+}

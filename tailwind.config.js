@@ -18,6 +18,7 @@ module.exports = {
         'date-gray-300': '#979797',
         'date-gray-200': '#D1D1D6',
         'date-gray-100': '#F2F7FB',
+        scrollbar: '#888',
       },
       width: {
         168: '42rem',
@@ -42,4 +43,9 @@ module.exports = {
       },
     },
   },
+  plugins: [
+    require('tailwind-scrollbar'), // 이 플러그인 추가
+  ],
+
+
 };

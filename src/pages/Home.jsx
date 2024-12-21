@@ -1,11 +1,10 @@
 import React from 'react';
 import Title from '../components/Title';
-import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 import MainCard from '../components/MainCard';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const Home = () => {
-
   const history = useNavigate();
 
   // 카드 클릭 이벤트 핸들러
@@ -13,32 +12,43 @@ const Home = () => {
     history(url);
   };
 
-
-  // view
   return (
-    <div className="w-full h-full px-6 pt-10 break-keep overflow-auto">
-      <i className="w-168 h-168 rounded-full bg-date-pink-500 fixed -z-10 -left-60 -top-56"></i>
-      <div className="fixed left-0 top-1/2 transform -translate-y-1/2 -z-10">
-        <img src="./images/black-background.jpg" alt="" />
+    // <div className="w-full h-full bg-gray-900 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded">
+    <div className="w-full h-screen bg-gray-900 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded">
+      {/* 배경 이미지 */}
+      <div
+        className="fixed left-0 top-1/2 transform -translate-y-1/2 -z-10"
+        style={{ width: '100%', height: '100%' }}
+      >
+        <img
+          src="./images/black-background.jpg"
+          alt=""
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            filter: 'brightness(50%)', // 배경 이미지 어두운 필터 적용
+          }}
+        />
       </div>
-      <div className="h-full flex flex-col">
-        <Title mainTitle={'동현 App'} />
-        <br />
-        
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          rowGap: '2rem', 
-          columnGap: '1rem', 
-          justifyItems: 'center',
-          alignItems: 'center'
-        }}>
-          <MainCard title={'To Do'} onClick={() => handleCardClick('/todo')} />
-          <MainCard title={'Expense Details'} />
-          <MainCard title={'Stock'} />
-        </div>
-        
-      </div>
+
+      {/* 컨텐츠 */}
+      <Container className="text-center py-5 relative z-10">
+        <Title mainTitle="동현 App" subTitle="2024년에 하나 만들어봐요." />
+
+        {/* 카드 레이아웃 */}
+        <Row className="mt-5">
+          <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
+            <MainCard title="To Do" onClick={() => handleCardClick('/todo')} />
+          </Col>
+          <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
+            <MainCard title="Expense Details" onClick={() => handleCardClick('/expense')} />
+          </Col>
+          <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
+            <MainCard title="Stock" onClick={() => handleCardClick('/stock')} />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
