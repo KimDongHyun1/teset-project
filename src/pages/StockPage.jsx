@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Card, Table } from 'react-bootstrap';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale } from 'chart.js';
+import { FaHome } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 // Chart.js 등록
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
 const StockPage = () => {
+  const navigate = useNavigate();
+
+  const goHome = () => {
+    navigate('/');
+  };
+
+
   const [stocks, setStocks] = useState([
     { id: 1, name: '테슬라', currentPrice: 400000, myStock: 500000 },
     { id: 2, name: '애플', currentPrice: 300000, myStock: 200000 },
@@ -31,7 +40,19 @@ const StockPage = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-center font-bold text-2xl mb-4">내 주식</h2>
+      {/* 헤더 */}
+      <Card className="shadow-sm mb-4 border-0 rounded-3">
+        <Card.Body className="d-flex justify-content-between align-items-center">
+          <FaHome 
+            onClick={goHome} 
+            style={{ fontSize: '2rem', cursor: 'pointer', color: '#5A5A5A' }} 
+          />
+          <Card.Title className="text-center flex-grow-1" style={{ fontSize: '2rem', fontWeight: 'bold', color: '#5A5A5A' }}>
+            Stock
+          </Card.Title>
+        </Card.Body>
+      </Card>
+
 
       {/* 주식 테이블 */}
       <Table striped bordered hover>
