@@ -59,7 +59,7 @@ const ToDo = () => {
             style={{ fontSize: '2rem', cursor: 'pointer', color: '#5A5A5A' }} 
           />
           <Card.Title className="text-center flex-grow-1" style={{ fontSize: '2rem', fontWeight: 'bold', color: '#5A5A5A' }}>
-            할 일 목록
+            To Do List
           </Card.Title>
         </Card.Body>
       </Card>

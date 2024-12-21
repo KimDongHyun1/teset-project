@@ -7,6 +7,8 @@ import Chat from './pages/Chat';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ToDo from './pages/ToDo';
+import Expense from './pages/Expense';
+import ExpenseDetail from './pages/ExpenseDetail';
 
 function App() {
   // logic
@@ -31,6 +33,9 @@ function App() {
         <Route path="/chat" element={<Chat userInfo={userInfo} partnerInfo={partnerInfo} />} />
 
         <Route path="/todo" element={<ToDo />} />
+        <Route path="/expense" element={<Expense />} />
+        <Route path="/expense/:month" element={<ExpenseDetail />} />
+
         
       </Routes>
     </div>
