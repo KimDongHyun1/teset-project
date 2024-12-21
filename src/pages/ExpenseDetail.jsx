@@ -78,24 +78,28 @@ const ExpenseDetail = () => {
               className="d-flex justify-content-between align-items-center py-3"
               style={{ backgroundColor: '#f9f9f9', borderBottom: '1px solid #ddd' }}
             >
-              <div>{income.source}</div>
-              <div className="d-flex justify-content-end align-items-center" style={{ width: '120px' }}>
+              <div className="d-flex align-items-center" style={{ width: '180px', flex: '0 0 auto' }}>
+                <span>{income.source}</span>
+              </div>
+              
+              <div className="d-flex justify-content-end align-items-center" style={{ width: '120px', flex: '0 0 auto' }}>
                 <span>{income.amount.toLocaleString()}</span>
                 <span className="ms-1">원</span>
+                <Button 
+                  variant="danger" 
+                  size="sm" 
+                  onClick={() => deleteIncome(income.id)} 
+                  className="shadow-sm ms-2"
+                  style={{
+                    borderRadius: '50%',
+                    backgroundColor: '#003366',
+                    borderColor: 'transparent',
+                    flex: '0 0 auto', // 버튼 고정
+                  }}
+                >
+                  <FaTrashAlt style={{ color: 'white' }} />
+                </Button>
               </div>
-              <Button 
-                variant="danger" 
-                size="sm" 
-                onClick={() => deleteIncome(income.id)} 
-                className="shadow-sm"
-                style={{
-                  borderRadius: '50%',
-                  backgroundColor: '#003366',
-                  borderColor: 'transparent'
-                }}
-              >
-                <FaTrashAlt style={{ color: 'white' }} />
-              </Button>
             </ListGroup.Item>
           ))}
         </ListGroup>
