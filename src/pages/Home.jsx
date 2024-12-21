@@ -34,7 +34,7 @@ const Home = () => {
 
       {/* 컨텐츠 */}
       <Container className="text-center py-5 relative z-10">
-        <Title mainTitle="동현 App" subTitle="2024년에 하나 만들어봐요." />
+        <Title mainTitle="동현 App" />
 
         {/* 카드 레이아웃 */}
         <Row className="mt-5">
