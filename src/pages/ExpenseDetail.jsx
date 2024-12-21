@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaHome, FaTrashAlt } from 'react-icons/fa';
+import { FaCalendarAlt, FaTrashAlt } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Card, Button, ListGroup } from 'react-bootstrap';
 
@@ -29,16 +29,16 @@ const ExpenseDetail = () => {
 
   const totalAmount = incomes.reduce((sum, income) => sum + income.amount, 0);
 
-  const goHome = () => {
-    navigate('/'); // 홈으로 이동
+  const goExpense = () => {
+    navigate('/expense'); // expense로 이동
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-md" style={{ paddingBottom: '80px' }}>
+    <div className="p-4 bg-white shadow-md rounded-md">
       {/* 상단 섹션 */}
       <div className="relative border-b pb-2 mb-4">
-        <FaHome 
-          onClick={goHome} 
+        <FaCalendarAlt 
+          onClick={goExpense} 
           className="absolute left-0 text-blue-500 cursor-pointer"
           style={{ fontSize: '1.8rem', top: '50%', transform: 'translateY(-50%)' }}
         />
@@ -70,7 +70,7 @@ const ExpenseDetail = () => {
       </div>
 
       {/* 수입 목록 */}
-      <div className="income-list" style={{ maxHeight: 'calc(100vh - 200px)', overflowY: 'auto', marginBottom: '50px' }}>
+      <div className="income-list" style={{ maxHeight: '300px', overflowY: 'auto', marginBottom: '50px' }}>
         <ListGroup>
           {incomes.map((income) => (
             <ListGroup.Item 
@@ -99,7 +99,7 @@ const ExpenseDetail = () => {
       </div>
 
       {/* 합계 고정 */}
-      <div className="bg-white p-4" style={{ position: 'fixed', bottom: '0', left: '0', right: '0', boxShadow: '0 -2px 10px rgba(0,0,0,0.1)', zIndex: '9999' }}>
+      <div className="fixed-bottom bg-white p-4" style={{ position: 'fixed', bottom: '0', width: '100%', boxShadow: '0 -2px 10px rgba(0,0,0,0.1)' }}>
         <div className="d-flex justify-content-between align-items-center">
           <span className="font-bold text-lg">합계:</span>
           <span className="font-bold text-lg">{totalAmount.toLocaleString()} 원</span>
