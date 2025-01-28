@@ -13,7 +13,6 @@ const Home = () => {
   };
 
   return (
-    // <div className="w-full h-full bg-gray-900 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded">
     <div className="w-full h-screen bg-gray-900 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded">
       {/* 배경 이미지 */}
       <div

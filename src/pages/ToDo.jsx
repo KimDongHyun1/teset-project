@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Container, Card, Button, Form, ListGroup, Row, Col } from 'react-bootstrap';
 import { FaCheckCircle, FaTrashAlt, FaHome } from 'react-icons/fa'; // FaHome 아이콘 추가
 import { useNavigate } from 'react-router-dom'; // useNavigate 추가
+import axios from 'axios';
+const endPoint = process.env.REACT_APP_SERVER_ADDRESS;
+
 
 const ToDo = () => {
   const history = useNavigate(); // useNavigate 훅 추가
@@ -14,33 +17,95 @@ const ToDo = () => {
 
   // 초기화
   useEffect(() => {
-    const defaultTasks = [
-      { id: '1', text: '배드민턴' },
-      { id: '2', text: '바람의나라' },
-      { id: '3', text: 'AWS 9 ~ 15' },
-      { id: '4', text: '영화 하얼빈 보기' },
-    ];
-    setTasks(defaultTasks);    
+    getTodos();
   }, []);
 
-  // 새로운 할 일 추가
-  const addTask = () => {
-    if (taskInput.trim()) {
-      setTasks([...tasks, { id: Date.now(), text: taskInput, completed: false }]);
-      setTaskInput("");
-    }
-  };
+  // 할 일 목록 호출
+  const getTodos = () => {
+    axios.post(`${endPoint}/todo/getTodos`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      console.log(0, response)
+      setTasks(response.data);
+    })
+    .catch(err => {
+      console.error("err", err)
+    });
+  }
 
-  // 할 일 완료 처리
-  const toggleCompletion = (id) => {
-    setTasks(tasks.map(task =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+  // 할 일 추가
+  const addTask = () => {
+    const data = {
+      text: taskInput
+    }
+
+    if (taskInput.trim()) {
+      axios.post(`${endPoint}/todo/createToDo`, 
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json' 
+          }
+        }
+      )
+      .then(response => {
+        setTaskInput("");
+        getTodos();
+      })
+      .catch(err => {
+        console.error("err", err)
+      });
+    }
   };
 
   // 할 일 삭제
   const deleteTask = (id) => {
-    setTasks(tasks.filter(task => task.id !== id));
+    const data = {
+      id: id
+    }
+
+    axios.post(`${endPoint}/todo/deleteToDo`, 
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json' 
+        }
+      }
+    )
+    .then(response => {
+      getTodos();
+    })
+    .catch(err => {
+      console.error("err", err)
+    });
+  };
+
+  // 할 일 완료 처리
+  const toggleCompletion = (id) => {
+    const filteredTasks = tasks.filter(task => task.id === id);
+
+    const data = {
+      id: id,
+      completed: filteredTasks[0].completed === 'Y' ? 'N' : 'Y'
+    }
+
+    axios.post(`${endPoint}/todo/updateToDo`, 
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json' 
+        }
+      }
+    )
+    .then(response => {
+      getTodos();
+    })
+    .catch(err => {
+      console.error("err", err)
+    });
   };
 
   // Home 버튼 클릭 시 홈으로 이동
@@ -100,12 +165,12 @@ const ToDo = () => {
           {tasks.map((task) => (
             <ListGroup.Item 
               key={task.id} 
-              className={`d-flex justify-content-between align-items-center py-3 ${task.completed ? 'bg-light text-decoration-line-through' : ''}`}
+              className={`d-flex justify-content-between align-items-center py-3 ${task.completed === 'Y' ? 'bg-light text-decoration-line-through' : ''}`}
               style={{ cursor: 'pointer', backgroundColor: '#f9f9f9' }}
             >
               <div onClick={() => toggleCompletion(task.id)} className="d-flex align-items-center">
                 <FaCheckCircle 
-                  className={`me-3 ${task.completed ? 'text-success' : 'text-muted'}`} 
+                  className={`me-3 ${task.completed === 'Y' ? 'text-success' : 'text-muted'}`} 
                   style={{ cursor: 'pointer' }}
                 />
                 {task.text}
