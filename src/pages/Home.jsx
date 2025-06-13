@@ -38,13 +38,13 @@ const Home = () => {
         {/* 카드 레이아웃 */}
         <Row className="mt-5">
           <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
-            <MainCard title="To Do" onClick={() => handleCardClick('/todo')} />
+            <MainCard title="To Do!" onClick={() => handleCardClick('/todo')} />
           </Col>
           <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
-            <MainCard title="Expense" onClick={() => handleCardClick('/expense')} />
+            <MainCard title="Expense!" onClick={() => handleCardClick('/expense')} />
           </Col>
           <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
-            <MainCard title="Stock" onClick={() => handleCardClick('/stockPage')} />
+            <MainCard title="Stock!" onClick={() => handleCardClick('/stockPage')} />
           </Col>
         </Row>
       </Container>
