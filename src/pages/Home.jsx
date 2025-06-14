@@ -32,22 +32,27 @@ const Home = () => {
       </div>
 
       {/* 컨텐츠 */}
-      <Container className="text-center py-5 relative z-10">
-        <Title mainTitle="동현 App" />
+      <Container className="py-5 relative z-10">
+        <div className="flex justify-center whitespace-nowrap">
+          <Title mainTitle="동현 App" />
+        </div>
+      </Container>
 
+      <Container className="relative z-10">
         {/* 카드 레이아웃 */}
         <Row className="mt-5">
-          <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
-            <MainCard title="To Do!" onClick={() => handleCardClick('/todo')} />
+          <Col xs={12} sm={6} md={4} lg={4} className="mb-3">
+            <MainCard title="To Do" onClick={() => handleCardClick('/todo')} />
           </Col>
-          <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
-            <MainCard title="Expense!" onClick={() => handleCardClick('/expense')} />
+          <Col xs={12} sm={6} md={4} lg={4} className="mb-3">
+            <MainCard title="Expense" onClick={() => handleCardClick('/expense')} />
           </Col>
-          <Col xs={12} sm={6} md={4} lg={3} className="mb-4">
-            <MainCard title="Stock!" onClick={() => handleCardClick('/stockPage')} />
+          <Col xs={12} sm={6} md={4} lg={4} className="mb-3">
+            <MainCard title="Stock" onClick={() => handleCardClick('/stockPage')} />
           </Col>
         </Row>
       </Container>
+
     </div>
   );
 };

@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'; // useNavigate 추가
 import axios from 'axios';
 const endPoint = process.env.REACT_APP_SERVER_ADDRESS;
 
-
 const ToDo = () => {
   const history = useNavigate(); // useNavigate 훅 추가
 
@@ -123,7 +122,7 @@ const ToDo = () => {
             style={{ fontSize: '2rem', cursor: 'pointer', color: '#5A5A5A' }} 
           />
           <Card.Title className="text-center flex-grow-1" style={{ fontSize: '2rem', fontWeight: 'bold', color: '#5A5A5A' }}>
-            To Do List
+            To Do
           </Card.Title>
         </Card.Body>
       </Card>
@@ -138,6 +137,7 @@ const ToDo = () => {
             onChange={(e) => setTaskInput(e.target.value)}
             className="rounded-pill py-2 px-3 shadow-sm"
             style={{ borderColor: '#D1D1D1' }}
+            maxLength={60}
           />
         </Col>
         <Col xs={3}>
@@ -161,36 +161,38 @@ const ToDo = () => {
           <Card.Text className="text-muted">할 일이 없습니다 📝</Card.Text>
         </Card>
       ) : (
-        <ListGroup>
-          {tasks.map((task) => (
-            <ListGroup.Item 
-              key={task.id} 
-              className={`d-flex justify-content-between align-items-center py-3 ${task.completed === 'Y' ? 'bg-light text-decoration-line-through' : ''}`}
-              style={{ cursor: 'pointer', backgroundColor: '#f9f9f9' }}
-            >
-              <div onClick={() => toggleCompletion(task.id)} className="d-flex align-items-center">
-                <FaCheckCircle 
-                  className={`me-3 ${task.completed === 'Y' ? 'text-success' : 'text-muted'}`} 
-                  style={{ cursor: 'pointer' }}
-                />
-                {task.text}
-              </div>
-              <Button 
-                variant="danger" 
-                size="sm" 
-                onClick={() => deleteTask(task.id)} 
-                className="shadow-sm"
-                style={{
-                  borderRadius: '50%',
-                  backgroundColor: '#003366', // 삭제 버튼 배경색을 남색으로 변경
-                  borderColor: 'transparent'
-                }}
+        <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+          <ListGroup>
+            {tasks.map((task) => (
+              <ListGroup.Item 
+                key={task.id} 
+                className={`d-flex justify-content-between align-items-center py-3 ${task.completed === 'Y' ? 'bg-light text-decoration-line-through' : ''}`}
+                style={{ cursor: 'pointer', backgroundColor: '#f9f9f9' }}
               >
-                <FaTrashAlt style={{ color: 'white' }} /> {/* 아이콘을 흰색으로 설정 */}
-              </Button>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+                <div onClick={() => toggleCompletion(task.id)} className="d-flex align-items-center">
+                  <FaCheckCircle 
+                    className={`me-3 ${task.completed === 'Y' ? 'text-success' : 'text-muted'}`} 
+                    style={{ cursor: 'pointer' }}
+                  />
+                  {task.text}
+                </div>
+                <Button 
+                  variant="danger" 
+                  size="sm" 
+                  onClick={() => deleteTask(task.id)} 
+                  className="shadow-sm"
+                  style={{
+                    borderRadius: '50%',
+                    backgroundColor: '#003366', // 삭제 버튼 배경색을 남색으로 변경
+                    borderColor: 'transparent'
+                  }}
+                >
+                  <FaTrashAlt style={{ color: 'white' }} /> {/* 아이콘을 흰색으로 설정 */}
+                </Button>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
       )}
     </Container>
   );
